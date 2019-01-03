@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+  graph:
+    build: ./graph
+    container_name: graph
+    ports:
+      - "80:4000"
+      - "443:443"
+    restart: always
+    environment:
+      NODE_ENV:
+    volumes:
+      - certbot-webroot-greedy-amigo:/graph/public/.well-known
+      - certbot-letsencrypt:/etc/letsencrypt
+
+  certbot:
+    build: ./certbot
+    container_name: certbot
+    restart: always
+    volumes:
+      - certbot-webroot-greedy-amigo:/webroots/greedy-amigo.com/.well-known
+      - certbot-letsencrypt:/etc/letsencrypt
+
+volumes:
+  certbot-webroot-greedy-amigo:
+  certbot-letsencrypt:
