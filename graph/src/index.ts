@@ -37,9 +37,9 @@ let server;
 if (config.ssl) {
     server = https.createServer(
         {
-            key: fs.readFileSync("/etc/letsencrypt/archive/evsoul.com/privkey1.pem"),
-            cert: fs.readFileSync("/etc/letsencrypt/archive/evsoul.com/fullchain1.pem"),
-            ca: fs.readFileSync("/etc/letsencrypt/archive/evsoul.com/chain1.pem")
+            key: fs.readFileSync("/etc/letsencrypt/archive/greedy-amigo.com/privkey1.pem"),
+            cert: fs.readFileSync("/etc/letsencrypt/archive/greedy-amigo.com/fullchain1.pem"),
+            ca: fs.readFileSync("/etc/letsencrypt/archive/greedy-amigo.com/chain1.pem")
         },
         app
     )
