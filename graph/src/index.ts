@@ -39,6 +39,7 @@ const apolloServer = new ApolloServer({
 const app = express();
 apolloServer.applyMiddleware({app});
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
+app.use('/static', express.static(path.join(__dirname,'public')));
 
 let server = http.createServer(app)
 apolloServer.installSubscriptionHandlers(server);
