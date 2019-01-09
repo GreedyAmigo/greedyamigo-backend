@@ -14,7 +14,6 @@ services:
     restart: always
     ports:
       - "4466:4466"
-      - "5432:5432"
     environment:
       PRISMA_CONFIG: |
         port: 4466
@@ -30,6 +29,8 @@ services:
   postgres:
     image: postgres:10.5
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
