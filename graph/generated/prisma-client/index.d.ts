@@ -14,6 +14,12 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
+  anonymousUser: (where?: AnonymousUserWhereInput) => Promise<boolean>;
+  currency: (where?: CurrencyWhereInput) => Promise<boolean>;
+  moneyLending: (where?: MoneyLendingWhereInput) => Promise<boolean>;
+  reminder: (where?: ReminderWhereInput) => Promise<boolean>;
+  thing: (where?: ThingWhereInput) => Promise<boolean>;
+  thingLending: (where?: ThingLendingWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -36,6 +42,141 @@ export interface Prisma {
    * Queries
    */
 
+  anonymousUser: (where: AnonymousUserWhereUniqueInput) => AnonymousUserPromise;
+  anonymousUsers: (
+    args?: {
+      where?: AnonymousUserWhereInput;
+      orderBy?: AnonymousUserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<AnonymousUser>;
+  anonymousUsersConnection: (
+    args?: {
+      where?: AnonymousUserWhereInput;
+      orderBy?: AnonymousUserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => AnonymousUserConnectionPromise;
+  currency: (where: CurrencyWhereUniqueInput) => CurrencyPromise;
+  currencies: (
+    args?: {
+      where?: CurrencyWhereInput;
+      orderBy?: CurrencyOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<Currency>;
+  currenciesConnection: (
+    args?: {
+      where?: CurrencyWhereInput;
+      orderBy?: CurrencyOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => CurrencyConnectionPromise;
+  moneyLendings: (
+    args?: {
+      where?: MoneyLendingWhereInput;
+      orderBy?: MoneyLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<MoneyLending>;
+  moneyLendingsConnection: (
+    args?: {
+      where?: MoneyLendingWhereInput;
+      orderBy?: MoneyLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => MoneyLendingConnectionPromise;
+  reminders: (
+    args?: {
+      where?: ReminderWhereInput;
+      orderBy?: ReminderOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<Reminder>;
+  remindersConnection: (
+    args?: {
+      where?: ReminderWhereInput;
+      orderBy?: ReminderOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => ReminderConnectionPromise;
+  thing: (where: ThingWhereUniqueInput) => ThingPromise;
+  things: (
+    args?: {
+      where?: ThingWhereInput;
+      orderBy?: ThingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<Thing>;
+  thingsConnection: (
+    args?: {
+      where?: ThingWhereInput;
+      orderBy?: ThingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => ThingConnectionPromise;
+  thingLendings: (
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<ThingLending>;
+  thingLendingsConnection: (
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => ThingLendingConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (
     args?: {
@@ -65,6 +206,83 @@ export interface Prisma {
    * Mutations
    */
 
+  createAnonymousUser: (data: AnonymousUserCreateInput) => AnonymousUserPromise;
+  updateAnonymousUser: (
+    args: {
+      data: AnonymousUserUpdateInput;
+      where: AnonymousUserWhereUniqueInput;
+    }
+  ) => AnonymousUserPromise;
+  updateManyAnonymousUsers: (
+    args: {
+      data: AnonymousUserUpdateManyMutationInput;
+      where?: AnonymousUserWhereInput;
+    }
+  ) => BatchPayloadPromise;
+  upsertAnonymousUser: (
+    args: {
+      where: AnonymousUserWhereUniqueInput;
+      create: AnonymousUserCreateInput;
+      update: AnonymousUserUpdateInput;
+    }
+  ) => AnonymousUserPromise;
+  deleteAnonymousUser: (
+    where: AnonymousUserWhereUniqueInput
+  ) => AnonymousUserPromise;
+  deleteManyAnonymousUsers: (
+    where?: AnonymousUserWhereInput
+  ) => BatchPayloadPromise;
+  createCurrency: (data: CurrencyCreateInput) => CurrencyPromise;
+  updateCurrency: (
+    args: { data: CurrencyUpdateInput; where: CurrencyWhereUniqueInput }
+  ) => CurrencyPromise;
+  updateManyCurrencies: (
+    args: { data: CurrencyUpdateManyMutationInput; where?: CurrencyWhereInput }
+  ) => BatchPayloadPromise;
+  upsertCurrency: (
+    args: {
+      where: CurrencyWhereUniqueInput;
+      create: CurrencyCreateInput;
+      update: CurrencyUpdateInput;
+    }
+  ) => CurrencyPromise;
+  deleteCurrency: (where: CurrencyWhereUniqueInput) => CurrencyPromise;
+  deleteManyCurrencies: (where?: CurrencyWhereInput) => BatchPayloadPromise;
+  createMoneyLending: (data: MoneyLendingCreateInput) => MoneyLendingPromise;
+  updateManyMoneyLendings: (
+    args: {
+      data: MoneyLendingUpdateManyMutationInput;
+      where?: MoneyLendingWhereInput;
+    }
+  ) => BatchPayloadPromise;
+  deleteManyMoneyLendings: (
+    where?: MoneyLendingWhereInput
+  ) => BatchPayloadPromise;
+  createReminder: (data: ReminderCreateInput) => ReminderPromise;
+  updateManyReminders: (
+    args: { data: ReminderUpdateManyMutationInput; where?: ReminderWhereInput }
+  ) => BatchPayloadPromise;
+  deleteManyReminders: (where?: ReminderWhereInput) => BatchPayloadPromise;
+  createThing: (data: ThingCreateInput) => ThingPromise;
+  updateThing: (
+    args: { data: ThingUpdateInput; where: ThingWhereUniqueInput }
+  ) => ThingPromise;
+  updateManyThings: (
+    args: { data: ThingUpdateManyMutationInput; where?: ThingWhereInput }
+  ) => BatchPayloadPromise;
+  upsertThing: (
+    args: {
+      where: ThingWhereUniqueInput;
+      create: ThingCreateInput;
+      update: ThingUpdateInput;
+    }
+  ) => ThingPromise;
+  deleteThing: (where: ThingWhereUniqueInput) => ThingPromise;
+  deleteManyThings: (where?: ThingWhereInput) => BatchPayloadPromise;
+  createThingLending: (data: ThingLendingCreateInput) => ThingLendingPromise;
+  deleteManyThingLendings: (
+    where?: ThingLendingWhereInput
+  ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (
     args: { data: UserUpdateInput; where: UserWhereUniqueInput }
@@ -90,6 +308,24 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  anonymousUser: (
+    where?: AnonymousUserSubscriptionWhereInput
+  ) => AnonymousUserSubscriptionPayloadSubscription;
+  currency: (
+    where?: CurrencySubscriptionWhereInput
+  ) => CurrencySubscriptionPayloadSubscription;
+  moneyLending: (
+    where?: MoneyLendingSubscriptionWhereInput
+  ) => MoneyLendingSubscriptionPayloadSubscription;
+  reminder: (
+    where?: ReminderSubscriptionWhereInput
+  ) => ReminderSubscriptionPayloadSubscription;
+  thing: (
+    where?: ThingSubscriptionWhereInput
+  ) => ThingSubscriptionPayloadSubscription;
+  thingLending: (
+    where?: ThingLendingSubscriptionWhereInput
+  ) => ThingLendingSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -103,11 +339,79 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type CurrencyOrderByInput =
+  | "symbol_ASC"
+  | "symbol_DESC"
+  | "Name_ASC"
+  | "Name_DESC"
+  | "Abbreviation_ASC"
+  | "Abbreviation_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type MoneyLendingOrderByInput =
+  | "amount_ASC"
+  | "amount_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ReminderOrderByInput =
+  | "dateTime_ASC"
+  | "dateTime_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ThingLendingOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type AnonymousUserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ThingOrderByInput =
+  | "label_ASC"
+  | "label_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "email_ASC"
+  | "email_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -115,16 +419,237 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateInput {
-  name: String;
+export interface AnonymousUserUpdateManyMutationInput {
+  firstName?: String;
+  lastName?: String;
+}
+
+export type AnonymousUserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ThingUpdateWithWhereUniqueNestedInput {
+  where: ThingWhereUniqueInput;
+  data: ThingUpdateDataInput;
+}
+
+export interface CurrencyCreateOneInput {
+  create?: CurrencyCreateInput;
+  connect?: CurrencyWhereUniqueInput;
+}
+
+export interface AnonymousUserWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  firstName?: String;
+  firstName_not?: String;
+  firstName_in?: String[] | String;
+  firstName_not_in?: String[] | String;
+  firstName_lt?: String;
+  firstName_lte?: String;
+  firstName_gt?: String;
+  firstName_gte?: String;
+  firstName_contains?: String;
+  firstName_not_contains?: String;
+  firstName_starts_with?: String;
+  firstName_not_starts_with?: String;
+  firstName_ends_with?: String;
+  firstName_not_ends_with?: String;
+  lastName?: String;
+  lastName_not?: String;
+  lastName_in?: String[] | String;
+  lastName_not_in?: String[] | String;
+  lastName_lt?: String;
+  lastName_lte?: String;
+  lastName_gt?: String;
+  lastName_gte?: String;
+  lastName_contains?: String;
+  lastName_not_contains?: String;
+  lastName_starts_with?: String;
+  lastName_not_starts_with?: String;
+  lastName_ends_with?: String;
+  lastName_not_ends_with?: String;
+  AND?: AnonymousUserWhereInput[] | AnonymousUserWhereInput;
+  OR?: AnonymousUserWhereInput[] | AnonymousUserWhereInput;
+  NOT?: AnonymousUserWhereInput[] | AnonymousUserWhereInput;
+}
+
+export interface CurrencyUpdateManyMutationInput {
+  symbol?: String;
+  Name?: String;
+  Abbreviation?: String;
+}
+
+export interface ThingUpdateManyInput {
+  create?: ThingCreateInput[] | ThingCreateInput;
+  update?:
+    | ThingUpdateWithWhereUniqueNestedInput[]
+    | ThingUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | ThingUpsertWithWhereUniqueNestedInput[]
+    | ThingUpsertWithWhereUniqueNestedInput;
+  delete?: ThingWhereUniqueInput[] | ThingWhereUniqueInput;
+  connect?: ThingWhereUniqueInput[] | ThingWhereUniqueInput;
+  disconnect?: ThingWhereUniqueInput[] | ThingWhereUniqueInput;
+  deleteMany?: ThingScalarWhereInput[] | ThingScalarWhereInput;
+  updateMany?:
+    | ThingUpdateManyWithWhereNestedInput[]
+    | ThingUpdateManyWithWhereNestedInput;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
 export interface UserUpdateInput {
-  name?: String;
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+  things?: ThingUpdateManyInput;
+  moneyLendings?: MoneyLendingUpdateManyInput;
+  thingLendings?: ThingLendingUpdateManyInput;
 }
 
-export interface UserUpdateManyMutationInput {
-  name?: String;
+export interface ThingLendingSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ThingLendingWhereInput;
+  AND?:
+    | ThingLendingSubscriptionWhereInput[]
+    | ThingLendingSubscriptionWhereInput;
+  OR?:
+    | ThingLendingSubscriptionWhereInput[]
+    | ThingLendingSubscriptionWhereInput;
+  NOT?:
+    | ThingLendingSubscriptionWhereInput[]
+    | ThingLendingSubscriptionWhereInput;
+}
+
+export interface ThingLendingCreateManyInput {
+  create?: ThingLendingCreateInput[] | ThingLendingCreateInput;
+}
+
+export interface ReminderSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ReminderWhereInput;
+  AND?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput;
+  OR?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput;
+  NOT?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput;
+}
+
+export interface MoneyLendingCreateManyInput {
+  create?: MoneyLendingCreateInput[] | MoneyLendingCreateInput;
+}
+
+export interface MoneyLendingWhereInput {
+  amount?: Int;
+  amount_not?: Int;
+  amount_in?: Int[] | Int;
+  amount_not_in?: Int[] | Int;
+  amount_lt?: Int;
+  amount_lte?: Int;
+  amount_gt?: Int;
+  amount_gte?: Int;
+  currency?: CurrencyWhereInput;
+  AND?: MoneyLendingWhereInput[] | MoneyLendingWhereInput;
+  OR?: MoneyLendingWhereInput[] | MoneyLendingWhereInput;
+  NOT?: MoneyLendingWhereInput[] | MoneyLendingWhereInput;
+}
+
+export interface ThingCreateManyInput {
+  create?: ThingCreateInput[] | ThingCreateInput;
+  connect?: ThingWhereUniqueInput[] | ThingWhereUniqueInput;
+}
+
+export interface AnonymousUserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AnonymousUserWhereInput;
+  AND?:
+    | AnonymousUserSubscriptionWhereInput[]
+    | AnonymousUserSubscriptionWhereInput;
+  OR?:
+    | AnonymousUserSubscriptionWhereInput[]
+    | AnonymousUserSubscriptionWhereInput;
+  NOT?:
+    | AnonymousUserSubscriptionWhereInput[]
+    | AnonymousUserSubscriptionWhereInput;
+}
+
+export interface UserCreateInput {
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+  things?: ThingCreateManyInput;
+  moneyLendings?: MoneyLendingCreateManyInput;
+  thingLendings?: ThingLendingCreateManyInput;
+}
+
+export interface ThingLendingUpdateManyInput {
+  create?: ThingLendingCreateInput[] | ThingLendingCreateInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface ReminderWhereInput {
+  dateTime?: DateTimeInput;
+  dateTime_not?: DateTimeInput;
+  dateTime_in?: DateTimeInput[] | DateTimeInput;
+  dateTime_not_in?: DateTimeInput[] | DateTimeInput;
+  dateTime_lt?: DateTimeInput;
+  dateTime_lte?: DateTimeInput;
+  dateTime_gt?: DateTimeInput;
+  dateTime_gte?: DateTimeInput;
+  AND?: ReminderWhereInput[] | ReminderWhereInput;
+  OR?: ReminderWhereInput[] | ReminderWhereInput;
+  NOT?: ReminderWhereInput[] | ReminderWhereInput;
+}
+
+export interface ThingCreateWithoutThingLendingsInput {
+  label: String;
+}
+
+export interface MoneyLendingScalarWhereInput {
+  amount?: Int;
+  amount_not?: Int;
+  amount_in?: Int[] | Int;
+  amount_not_in?: Int[] | Int;
+  amount_lt?: Int;
+  amount_lte?: Int;
+  amount_gt?: Int;
+  amount_gte?: Int;
+  AND?: MoneyLendingScalarWhereInput[] | MoneyLendingScalarWhereInput;
+  OR?: MoneyLendingScalarWhereInput[] | MoneyLendingScalarWhereInput;
+  NOT?: MoneyLendingScalarWhereInput[] | MoneyLendingScalarWhereInput;
 }
 
 export interface UserWhereInput {
@@ -142,58 +667,427 @@ export interface UserWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
+  firstName?: String;
+  firstName_not?: String;
+  firstName_in?: String[] | String;
+  firstName_not_in?: String[] | String;
+  firstName_lt?: String;
+  firstName_lte?: String;
+  firstName_gt?: String;
+  firstName_gte?: String;
+  firstName_contains?: String;
+  firstName_not_contains?: String;
+  firstName_starts_with?: String;
+  firstName_not_starts_with?: String;
+  firstName_ends_with?: String;
+  firstName_not_ends_with?: String;
+  lastName?: String;
+  lastName_not?: String;
+  lastName_in?: String[] | String;
+  lastName_not_in?: String[] | String;
+  lastName_lt?: String;
+  lastName_lte?: String;
+  lastName_gt?: String;
+  lastName_gte?: String;
+  lastName_contains?: String;
+  lastName_not_contains?: String;
+  lastName_starts_with?: String;
+  lastName_not_starts_with?: String;
+  lastName_ends_with?: String;
+  lastName_not_ends_with?: String;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  things_every?: ThingWhereInput;
+  things_some?: ThingWhereInput;
+  things_none?: ThingWhereInput;
+  moneyLendings_every?: MoneyLendingWhereInput;
+  moneyLendings_some?: MoneyLendingWhereInput;
+  moneyLendings_none?: MoneyLendingWhereInput;
+  thingLendings_every?: ThingLendingWhereInput;
+  thingLendings_some?: ThingLendingWhereInput;
+  thingLendings_none?: ThingLendingWhereInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface ThingUpdateManyDataInput {
+  label?: String;
+}
+
+export interface ThingCreateOneWithoutThingLendingsInput {
+  create?: ThingCreateWithoutThingLendingsInput;
+  connect?: ThingWhereUniqueInput;
+}
+
+export interface ThingScalarWhereInput {
+  label?: String;
+  label_not?: String;
+  label_in?: String[] | String;
+  label_not_in?: String[] | String;
+  label_lt?: String;
+  label_lte?: String;
+  label_gt?: String;
+  label_gte?: String;
+  label_contains?: String;
+  label_not_contains?: String;
+  label_starts_with?: String;
+  label_not_starts_with?: String;
+  label_ends_with?: String;
+  label_not_ends_with?: String;
+  AND?: ThingScalarWhereInput[] | ThingScalarWhereInput;
+  OR?: ThingScalarWhereInput[] | ThingScalarWhereInput;
+  NOT?: ThingScalarWhereInput[] | ThingScalarWhereInput;
+}
+
+export interface ThingLendingCreateInput {
+  thing: ThingCreateOneWithoutThingLendingsInput;
+}
+
+export interface ThingUpsertWithWhereUniqueNestedInput {
+  where: ThingWhereUniqueInput;
+  update: ThingUpdateDataInput;
+  create: ThingCreateInput;
+}
+
+export interface ThingUpdateManyMutationInput {
+  label?: String;
+}
+
+export interface ThingWhereInput {
+  label?: String;
+  label_not?: String;
+  label_in?: String[] | String;
+  label_not_in?: String[] | String;
+  label_lt?: String;
+  label_lte?: String;
+  label_gt?: String;
+  label_gte?: String;
+  label_contains?: String;
+  label_not_contains?: String;
+  label_starts_with?: String;
+  label_not_starts_with?: String;
+  label_ends_with?: String;
+  label_not_ends_with?: String;
+  thingLendings_every?: ThingLendingWhereInput;
+  thingLendings_some?: ThingLendingWhereInput;
+  thingLendings_none?: ThingLendingWhereInput;
+  AND?: ThingWhereInput[] | ThingWhereInput;
+  OR?: ThingWhereInput[] | ThingWhereInput;
+  NOT?: ThingWhereInput[] | ThingWhereInput;
+}
+
+export interface ThingUpdateInput {
+  label?: String;
+}
+
+export type CurrencyWhereUniqueInput = AtLeastOne<{
+  Abbreviation: String;
+}>;
+
+export interface ThingSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  node?: ThingWhereInput;
+  AND?: ThingSubscriptionWhereInput[] | ThingSubscriptionWhereInput;
+  OR?: ThingSubscriptionWhereInput[] | ThingSubscriptionWhereInput;
+  NOT?: ThingSubscriptionWhereInput[] | ThingSubscriptionWhereInput;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
+export interface CurrencySubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: CurrencyWhereInput;
+  AND?: CurrencySubscriptionWhereInput[] | CurrencySubscriptionWhereInput;
+  OR?: CurrencySubscriptionWhereInput[] | CurrencySubscriptionWhereInput;
+  NOT?: CurrencySubscriptionWhereInput[] | CurrencySubscriptionWhereInput;
+}
+
+export interface AnonymousUserCreateInput {
+  firstName?: String;
+  lastName?: String;
+}
+
+export interface MoneyLendingUpdateManyDataInput {
+  amount?: Int;
+}
+
+export interface AnonymousUserUpdateInput {
+  firstName?: String;
+  lastName?: String;
+}
+
+export interface MoneyLendingUpdateManyInput {
+  create?: MoneyLendingCreateInput[] | MoneyLendingCreateInput;
+  deleteMany?: MoneyLendingScalarWhereInput[] | MoneyLendingScalarWhereInput;
+  updateMany?:
+    | MoneyLendingUpdateManyWithWhereNestedInput[]
+    | MoneyLendingUpdateManyWithWhereNestedInput;
+}
+
+export interface ThingCreateInput {
+  label: String;
+}
+
+export type ThingWhereUniqueInput = AtLeastOne<{
+  label: String;
 }>;
+
+export interface ReminderUpdateManyMutationInput {
+  dateTime?: DateTimeInput;
+}
+
+export interface ThingUpdateDataInput {
+  label?: String;
+}
+
+export interface ReminderCreateInput {
+  dateTime?: DateTimeInput;
+}
+
+export interface MoneyLendingSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: MoneyLendingWhereInput;
+  AND?:
+    | MoneyLendingSubscriptionWhereInput[]
+    | MoneyLendingSubscriptionWhereInput;
+  OR?:
+    | MoneyLendingSubscriptionWhereInput[]
+    | MoneyLendingSubscriptionWhereInput;
+  NOT?:
+    | MoneyLendingSubscriptionWhereInput[]
+    | MoneyLendingSubscriptionWhereInput;
+}
+
+export interface MoneyLendingCreateInput {
+  amount: Int;
+  currency: CurrencyCreateOneInput;
+}
+
+export interface MoneyLendingUpdateManyMutationInput {
+  amount?: Int;
+}
+
+export interface CurrencyUpdateInput {
+  symbol?: String;
+  Name?: String;
+  Abbreviation?: String;
+}
+
+export interface CurrencyCreateInput {
+  symbol: String;
+  Name: String;
+  Abbreviation: String;
+}
+
+export interface UserUpdateManyMutationInput {
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+}
+
+export interface CurrencyWhereInput {
+  symbol?: String;
+  symbol_not?: String;
+  symbol_in?: String[] | String;
+  symbol_not_in?: String[] | String;
+  symbol_lt?: String;
+  symbol_lte?: String;
+  symbol_gt?: String;
+  symbol_gte?: String;
+  symbol_contains?: String;
+  symbol_not_contains?: String;
+  symbol_starts_with?: String;
+  symbol_not_starts_with?: String;
+  symbol_ends_with?: String;
+  symbol_not_ends_with?: String;
+  Name?: String;
+  Name_not?: String;
+  Name_in?: String[] | String;
+  Name_not_in?: String[] | String;
+  Name_lt?: String;
+  Name_lte?: String;
+  Name_gt?: String;
+  Name_gte?: String;
+  Name_contains?: String;
+  Name_not_contains?: String;
+  Name_starts_with?: String;
+  Name_not_starts_with?: String;
+  Name_ends_with?: String;
+  Name_not_ends_with?: String;
+  Abbreviation?: String;
+  Abbreviation_not?: String;
+  Abbreviation_in?: String[] | String;
+  Abbreviation_not_in?: String[] | String;
+  Abbreviation_lt?: String;
+  Abbreviation_lte?: String;
+  Abbreviation_gt?: String;
+  Abbreviation_gte?: String;
+  Abbreviation_contains?: String;
+  Abbreviation_not_contains?: String;
+  Abbreviation_starts_with?: String;
+  Abbreviation_not_starts_with?: String;
+  Abbreviation_ends_with?: String;
+  Abbreviation_not_ends_with?: String;
+  AND?: CurrencyWhereInput[] | CurrencyWhereInput;
+  OR?: CurrencyWhereInput[] | CurrencyWhereInput;
+  NOT?: CurrencyWhereInput[] | CurrencyWhereInput;
+}
+
+export interface ThingLendingWhereInput {
+  thing?: ThingWhereInput;
+  AND?: ThingLendingWhereInput[] | ThingLendingWhereInput;
+  OR?: ThingLendingWhereInput[] | ThingLendingWhereInput;
+  NOT?: ThingLendingWhereInput[] | ThingLendingWhereInput;
+}
+
+export interface ThingUpdateManyWithWhereNestedInput {
+  where: ThingScalarWhereInput;
+  data: ThingUpdateManyDataInput;
+}
+
+export interface MoneyLendingUpdateManyWithWhereNestedInput {
+  where: MoneyLendingScalarWhereInput;
+  data: MoneyLendingUpdateManyDataInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface AggregateUser {
+export interface UserPreviousValues {
+  id: ID_Output;
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  email: () => Promise<String>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMoneyLending {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateMoneyLendingPromise
+  extends Promise<AggregateMoneyLending>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateMoneyLendingSubscription
+  extends Promise<AsyncIterator<AggregateMoneyLending>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AnonymousUserEdge {
+  node: AnonymousUser;
+  cursor: String;
+}
+
+export interface AnonymousUserEdgePromise
+  extends Promise<AnonymousUserEdge>,
+    Fragmentable {
+  node: <T = AnonymousUserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AnonymousUserEdgeSubscription
+  extends Promise<AsyncIterator<AnonymousUserEdge>>,
+    Fragmentable {
+  node: <T = AnonymousUserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MoneyLendingEdge {
+  node: MoneyLending;
+  cursor: String;
+}
+
+export interface MoneyLendingEdgePromise
+  extends Promise<MoneyLendingEdge>,
+    Fragmentable {
+  node: <T = MoneyLendingPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MoneyLendingEdgeSubscription
+  extends Promise<AsyncIterator<MoneyLendingEdge>>,
+    Fragmentable {
+  node: <T = MoneyLendingSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateAnonymousUser {
+  count: Int;
+}
+
+export interface AggregateAnonymousUserPromise
+  extends Promise<AggregateAnonymousUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAnonymousUserSubscription
+  extends Promise<AsyncIterator<AggregateAnonymousUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MoneyLendingConnection {
+  pageInfo: PageInfo;
+  edges: MoneyLendingEdge[];
+}
+
+export interface MoneyLendingConnectionPromise
+  extends Promise<MoneyLendingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MoneyLendingEdge>>() => T;
+  aggregate: <T = AggregateMoneyLendingPromise>() => T;
+}
+
+export interface MoneyLendingConnectionSubscription
+  extends Promise<AsyncIterator<MoneyLendingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MoneyLendingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMoneyLendingSubscription>() => T;
 }
 
 export interface BatchPayload {
@@ -212,40 +1106,530 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
+export interface MoneyLending {
+  amount: Int;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface MoneyLendingPromise
+  extends Promise<MoneyLending>,
+    Fragmentable {
+  amount: () => Promise<Int>;
+  currency: <T = CurrencyPromise>() => T;
+}
+
+export interface MoneyLendingSubscription
+  extends Promise<AsyncIterator<MoneyLending>>,
+    Fragmentable {
+  amount: () => Promise<AsyncIterator<Int>>;
+  currency: <T = CurrencySubscription>() => T;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AnonymousUser {
+  id: ID_Output;
+  firstName?: String;
+  lastName?: String;
+}
+
+export interface AnonymousUserPromise
+  extends Promise<AnonymousUser>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface AnonymousUserSubscription
+  extends Promise<AsyncIterator<AnonymousUser>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserEdge {
-  node: User;
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface AnonymousUserSubscriptionPayload {
+  mutation: MutationType;
+  node: AnonymousUser;
+  updatedFields: String[];
+  previousValues: AnonymousUserPreviousValues;
+}
+
+export interface AnonymousUserSubscriptionPayloadPromise
+  extends Promise<AnonymousUserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AnonymousUserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AnonymousUserPreviousValuesPromise>() => T;
+}
+
+export interface AnonymousUserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AnonymousUserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AnonymousUserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AnonymousUserPreviousValuesSubscription>() => T;
+}
+
+export interface User {
+  id: ID_Output;
+  firstName?: String;
+  lastName?: String;
+  email?: String;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  email: () => Promise<String>;
+  things: <T = FragmentableArray<Thing>>(
+    args?: {
+      where?: ThingWhereInput;
+      orderBy?: ThingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  moneyLendings: <T = FragmentableArray<MoneyLending>>(
+    args?: {
+      where?: MoneyLendingWhereInput;
+      orderBy?: MoneyLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  thingLendings: <T = FragmentableArray<ThingLending>>(
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  things: <T = Promise<AsyncIterator<ThingSubscription>>>(
+    args?: {
+      where?: ThingWhereInput;
+      orderBy?: ThingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  moneyLendings: <T = Promise<AsyncIterator<MoneyLendingSubscription>>>(
+    args?: {
+      where?: MoneyLendingWhereInput;
+      orderBy?: MoneyLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  thingLendings: <T = Promise<AsyncIterator<ThingLendingSubscription>>>(
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface AnonymousUserPreviousValues {
+  id: ID_Output;
+  firstName?: String;
+  lastName?: String;
+}
+
+export interface AnonymousUserPreviousValuesPromise
+  extends Promise<AnonymousUserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+}
+
+export interface AnonymousUserPreviousValuesSubscription
+  extends Promise<AsyncIterator<AnonymousUserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ThingLendingEdge {
+  node: ThingLending;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface ThingLendingEdgePromise
+  extends Promise<ThingLendingEdge>,
+    Fragmentable {
+  node: <T = ThingLendingPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface ThingLendingEdgeSubscription
+  extends Promise<AsyncIterator<ThingLendingEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = ThingLendingSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateThing {
+  count: Int;
+}
+
+export interface AggregateThingPromise
+  extends Promise<AggregateThing>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateThingSubscription
+  extends Promise<AsyncIterator<AggregateThing>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CurrencySubscriptionPayload {
+  mutation: MutationType;
+  node: Currency;
+  updatedFields: String[];
+  previousValues: CurrencyPreviousValues;
+}
+
+export interface CurrencySubscriptionPayloadPromise
+  extends Promise<CurrencySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CurrencyPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CurrencyPreviousValuesPromise>() => T;
+}
+
+export interface CurrencySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CurrencySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CurrencySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CurrencyPreviousValuesSubscription>() => T;
+}
+
+export interface ThingConnection {
+  pageInfo: PageInfo;
+  edges: ThingEdge[];
+}
+
+export interface ThingConnectionPromise
+  extends Promise<ThingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ThingEdge>>() => T;
+  aggregate: <T = AggregateThingPromise>() => T;
+}
+
+export interface ThingConnectionSubscription
+  extends Promise<AsyncIterator<ThingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ThingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateThingSubscription>() => T;
+}
+
+export interface CurrencyPreviousValues {
+  symbol: String;
+  Name: String;
+  Abbreviation: String;
+}
+
+export interface CurrencyPreviousValuesPromise
+  extends Promise<CurrencyPreviousValues>,
+    Fragmentable {
+  symbol: () => Promise<String>;
+  Name: () => Promise<String>;
+  Abbreviation: () => Promise<String>;
+}
+
+export interface CurrencyPreviousValuesSubscription
+  extends Promise<AsyncIterator<CurrencyPreviousValues>>,
+    Fragmentable {
+  symbol: () => Promise<AsyncIterator<String>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  Abbreviation: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateReminder {
+  count: Int;
+}
+
+export interface AggregateReminderPromise
+  extends Promise<AggregateReminder>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateReminderSubscription
+  extends Promise<AsyncIterator<AggregateReminder>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateCurrency {
+  count: Int;
+}
+
+export interface AggregateCurrencyPromise
+  extends Promise<AggregateCurrency>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCurrencySubscription
+  extends Promise<AsyncIterator<AggregateCurrency>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ReminderConnection {
+  pageInfo: PageInfo;
+  edges: ReminderEdge[];
+}
+
+export interface ReminderConnectionPromise
+  extends Promise<ReminderConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ReminderEdge>>() => T;
+  aggregate: <T = AggregateReminderPromise>() => T;
+}
+
+export interface ReminderConnectionSubscription
+  extends Promise<AsyncIterator<ReminderConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ReminderEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateReminderSubscription>() => T;
+}
+
+export interface MoneyLendingSubscriptionPayload {
+  mutation: MutationType;
+  node: MoneyLending;
+  updatedFields: String[];
+  previousValues: MoneyLendingPreviousValues;
+}
+
+export interface MoneyLendingSubscriptionPayloadPromise
+  extends Promise<MoneyLendingSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MoneyLendingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MoneyLendingPreviousValuesPromise>() => T;
+}
+
+export interface MoneyLendingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MoneyLendingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MoneyLendingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MoneyLendingPreviousValuesSubscription>() => T;
+}
+
+export interface AnonymousUserConnection {
+  pageInfo: PageInfo;
+  edges: AnonymousUserEdge[];
+}
+
+export interface AnonymousUserConnectionPromise
+  extends Promise<AnonymousUserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AnonymousUserEdge>>() => T;
+  aggregate: <T = AggregateAnonymousUserPromise>() => T;
+}
+
+export interface AnonymousUserConnectionSubscription
+  extends Promise<AsyncIterator<AnonymousUserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AnonymousUserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAnonymousUserSubscription>() => T;
+}
+
+export interface Reminder {
+  dateTime?: DateTimeOutput;
+}
+
+export interface ReminderPromise extends Promise<Reminder>, Fragmentable {
+  dateTime: () => Promise<DateTimeOutput>;
+}
+
+export interface ReminderSubscription
+  extends Promise<AsyncIterator<Reminder>>,
+    Fragmentable {
+  dateTime: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ThingPreviousValues {
+  label: String;
+}
+
+export interface ThingPreviousValuesPromise
+  extends Promise<ThingPreviousValues>,
+    Fragmentable {
+  label: () => Promise<String>;
+}
+
+export interface ThingPreviousValuesSubscription
+  extends Promise<AsyncIterator<ThingPreviousValues>>,
+    Fragmentable {
+  label: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Currency {
+  symbol: String;
+  Name: String;
+  Abbreviation: String;
+}
+
+export interface CurrencyPromise extends Promise<Currency>, Fragmentable {
+  symbol: () => Promise<String>;
+  Name: () => Promise<String>;
+  Abbreviation: () => Promise<String>;
+}
+
+export interface CurrencySubscription
+  extends Promise<AsyncIterator<Currency>>,
+    Fragmentable {
+  symbol: () => Promise<AsyncIterator<String>>;
+  Name: () => Promise<AsyncIterator<String>>;
+  Abbreviation: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MoneyLendingPreviousValues {
+  amount: Int;
+}
+
+export interface MoneyLendingPreviousValuesPromise
+  extends Promise<MoneyLendingPreviousValues>,
+    Fragmentable {
+  amount: () => Promise<Int>;
+}
+
+export interface MoneyLendingPreviousValuesSubscription
+  extends Promise<AsyncIterator<MoneyLendingPreviousValues>>,
+    Fragmentable {
+  amount: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ThingLendingSubscriptionPayload {
+  mutation: MutationType;
+  node: ThingLending;
+  updatedFields: String[];
+}
+
+export interface ThingLendingSubscriptionPayloadPromise
+  extends Promise<ThingLendingSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ThingLendingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+}
+
+export interface ThingLendingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ThingLendingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ThingLendingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -273,84 +1657,279 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface User {
-  id: ID_Output;
-  name: String;
+export interface CurrencyEdge {
+  node: Currency;
+  cursor: String;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface CurrencyEdgePromise
+  extends Promise<CurrencyEdge>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
+  node: <T = CurrencyPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface UserConnection {
+export interface CurrencyEdgeSubscription
+  extends Promise<AsyncIterator<CurrencyEdge>>,
+    Fragmentable {
+  node: <T = CurrencySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ThingLendingConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: ThingLendingEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface ThingLendingConnectionPromise
+  extends Promise<ThingLendingConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<ThingLendingEdge>>() => T;
+  aggregate: <T = AggregateThingLendingPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface ThingLendingConnectionSubscription
+  extends Promise<AsyncIterator<ThingLendingConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ThingLendingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateThingLendingSubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
+export interface ThingLending {}
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface ThingLendingPromise
+  extends Promise<ThingLending>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  thing: <T = ThingPromise>() => T;
 }
+
+export interface ThingLendingSubscription
+  extends Promise<AsyncIterator<ThingLending>>,
+    Fragmentable {
+  thing: <T = ThingSubscription>() => T;
+}
+
+export interface ThingSubscriptionPayload {
+  mutation: MutationType;
+  node: Thing;
+  updatedFields: String[];
+  previousValues: ThingPreviousValues;
+}
+
+export interface ThingSubscriptionPayloadPromise
+  extends Promise<ThingSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ThingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ThingPreviousValuesPromise>() => T;
+}
+
+export interface ThingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ThingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ThingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ThingPreviousValuesSubscription>() => T;
+}
+
+export interface CurrencyConnection {
+  pageInfo: PageInfo;
+  edges: CurrencyEdge[];
+}
+
+export interface CurrencyConnectionPromise
+  extends Promise<CurrencyConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CurrencyEdge>>() => T;
+  aggregate: <T = AggregateCurrencyPromise>() => T;
+}
+
+export interface CurrencyConnectionSubscription
+  extends Promise<AsyncIterator<CurrencyConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CurrencyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCurrencySubscription>() => T;
+}
+
+export interface ReminderPreviousValues {
+  dateTime?: DateTimeOutput;
+}
+
+export interface ReminderPreviousValuesPromise
+  extends Promise<ReminderPreviousValues>,
+    Fragmentable {
+  dateTime: () => Promise<DateTimeOutput>;
+}
+
+export interface ReminderPreviousValuesSubscription
+  extends Promise<AsyncIterator<ReminderPreviousValues>>,
+    Fragmentable {
+  dateTime: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ReminderSubscriptionPayload {
+  mutation: MutationType;
+  node: Reminder;
+  updatedFields: String[];
+  previousValues: ReminderPreviousValues;
+}
+
+export interface ReminderSubscriptionPayloadPromise
+  extends Promise<ReminderSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ReminderPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ReminderPreviousValuesPromise>() => T;
+}
+
+export interface ReminderSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ReminderSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ReminderSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ReminderPreviousValuesSubscription>() => T;
+}
+
+export interface Thing {
+  label: String;
+}
+
+export interface ThingPromise extends Promise<Thing>, Fragmentable {
+  label: () => Promise<String>;
+  thingLendings: <T = FragmentableArray<ThingLending>>(
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface ThingSubscription
+  extends Promise<AsyncIterator<Thing>>,
+    Fragmentable {
+  label: () => Promise<AsyncIterator<String>>;
+  thingLendings: <T = Promise<AsyncIterator<ThingLendingSubscription>>>(
+    args?: {
+      where?: ThingLendingWhereInput;
+      orderBy?: ThingLendingOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface ThingEdge {
+  node: Thing;
+  cursor: String;
+}
+
+export interface ThingEdgePromise extends Promise<ThingEdge>, Fragmentable {
+  node: <T = ThingPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ThingEdgeSubscription
+  extends Promise<AsyncIterator<ThingEdge>>,
+    Fragmentable {
+  node: <T = ThingSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateThingLending {
+  count: Int;
+}
+
+export interface AggregateThingLendingPromise
+  extends Promise<AggregateThingLending>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateThingLendingSubscription
+  extends Promise<AsyncIterator<AggregateThingLending>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ReminderEdge {
+  node: Reminder;
+  cursor: String;
+}
+
+export interface ReminderEdgePromise
+  extends Promise<ReminderEdge>,
+    Fragmentable {
+  node: <T = ReminderPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ReminderEdgeSubscription
+  extends Promise<AsyncIterator<ReminderEdge>>,
+    Fragmentable {
+  node: <T = ReminderSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
+export type Long = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string;
 
-export type Long = string;
+/*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -362,6 +1941,30 @@ export type Boolean = boolean;
  */
 
 export const models: Model[] = [
+  {
+    name: "AnonymousUser",
+    embedded: false
+  },
+  {
+    name: "Currency",
+    embedded: false
+  },
+  {
+    name: "MoneyLending",
+    embedded: false
+  },
+  {
+    name: "Reminder",
+    embedded: false
+  },
+  {
+    name: "Thing",
+    embedded: false
+  },
+  {
+    name: "ThingLending",
+    embedded: false
+  },
   {
     name: "User",
     embedded: false

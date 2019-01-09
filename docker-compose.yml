@@ -14,6 +14,7 @@ services:
     restart: always
     ports:
       - "4466:4466"
+      - "5432:5432"
     environment:
       PRISMA_CONFIG: |
         port: 4466

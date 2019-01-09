@@ -1,4 +1,49 @@
+type AnonymousUser {
+  id: ID! @unique
+  firstName: String
+  lastName: String
+}
+
 type User {
   id: ID! @unique
-  name: String!
+  firstName: String
+  lastName: String
+  email: String @unique
+  things: [Thing!]
+  moneyLendings: [MoneyLending!]
+  thingLendings: [ThingLending!]
+}
+
+type Thing {
+  label: String! @unique
+  thingLendings: [ThingLending!]
+}
+
+type Reminder {
+  dateTime: DateTime
+}
+
+interface Lending {
+    id: ID! @unique
+    dueDate: Date
+    description: String!
+    cleared: Boolean! @defaultValue(value: false)
+    emoji: String!
+    reminder: [Reminder!]
+}
+
+type MoneyLending implements Lending {
+    amount: Int!
+    currency: Currency!
+
+}
+
+type ThingLending implements Lending {
+    thing: Thing!
+}
+
+type Currency {
+    symbol: String!
+    Name: String!
+    Abbreviation: String! @unique
 }
