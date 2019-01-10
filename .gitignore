@@ -98,7 +98,10 @@ jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
+
+# Generated files
 graph/dist/
+graph/src/generated
 
 # Optional npm cache directory
 .npm
