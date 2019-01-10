@@ -1,0 +1,85 @@
+scalar Date
+scalar DateTime
+
+type AnonymousUser {
+    id: ID!
+    firstName: String
+    lastName: String
+    user: User!
+}
+
+type User {
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    things: [Thing!]
+    moneyLendings: [MoneyLending!]
+    thingLendings: [ThingLending!]
+}
+
+type Thing {
+    id: ID!
+    label: String!
+    thingLendings: [ThingLending!]
+}
+
+type Reminder {
+    dateTime: DateTime
+}
+
+interface Lending {
+    id: ID!
+    dueDate: Date
+    description: String!
+    cleared: Boolean!
+    emoji: String!
+    reminder: [Reminder!]
+}
+
+type MoneyLending implements Lending {
+    id: ID!
+    dueDate: Date
+    description: String!
+    cleared: Boolean!
+    emoji: String!
+    reminder: [Reminder!]
+    amount: Int!
+    currency: Currency!
+
+}
+
+type ThingLending implements Lending {
+    id: ID!
+    dueDate: Date
+    description: String!
+    cleared: Boolean!
+    emoji: String!
+    reminder: [Reminder!]
+    thing: Thing!
+}
+
+type Currency {
+    id: ID!
+    symbol: String!
+    Name: String!
+    Abbreviation: String!
+}
+
+type Query {
+    anonymousUsersByUser(userId: ID!): [AnonymousUser!]!
+    lendingsByUser(userId: ID!): [Lending!]!
+    moneyLending(moneyLendingId: ID!): MoneyLending
+    thingLending(thingLendingId: ID!): ThingLending
+    thingsByUser(userId: ID!): [Thing!]!
+    currenciesByAbbreviation(abbreviation: String!): Currency!
+    currencies: [Currency!]!
+}
+
+type Mutation {
+    createUser(email: String!, firtName: String!, lastName: String!): User
+    createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser
+    createMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending
+    createThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending
+    createThing(label: String!, userId: ID!): Thing
+}

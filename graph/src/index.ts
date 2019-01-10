@@ -1,4 +1,5 @@
 import {ApolloServer} from "apollo-server-express";
+import { importSchema } from "graphql-import";
 import * as express from "express";
 import * as http from "http";
 import * as jwt from "jsonwebtoken";
@@ -7,7 +8,7 @@ import * as jwksClient from "jwks-rsa";
 import * as path from "path";
 import * as favicon from "serve-favicon";
 import {resolvers} from "./resolvers";
-import {typeDefs} from "./schema";
+import {prisma, User} from "./generated/prisma-client";
 
 dotenv.config();
 const configurations = {
@@ -39,26 +40,34 @@ const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+function getUser(req: any, token: string): User {
+    if (req.body.operationName != "IntrospectionQuery" || true) {
+        const user = new Promise((resolve, reject) => {
+            jwt.verify(token, getKey, options, (error, decoded) => {
+                if(error) {
+                    return reject(error);
+                } else {
+                    resolve(decoded);
+                }
+            });
+        });
+
+        /*return {
+            user
+        };*/
+        return null;
+    }
+}
+
 const apolloServer = new ApolloServer({
-    typeDefs,
+    typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
     resolvers,
     context: ({ req }) => {
-        if (req.body.operationName != "IntrospectionQuery") {
-            const token = req.headers.authorization;
-            const user = new Promise((resolve, reject) => {
-                jwt.verify(token, getKey, options, (error, decoded) => {
-                    if(error) {
-                        return reject(error);
-                    } else {
-                        resolve(decoded);
-                    }
-                });
-            });
-
-            return {
-                user
-            };
-        }
+        const token = req.headers.authorization;
+        return {
+            prisma: prisma,
+            user: getUser(req, token)
+        };
     }
 });
 
