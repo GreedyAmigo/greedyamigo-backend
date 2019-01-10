@@ -8,7 +8,11 @@ MAX_TRIES=5
 # Return true-like values if and only if logs
 # contain the expected "ready" line
 function dbIsReady() {
-  docker-compose logs db | grep "PostgreSQL init process complete"
+  docker-compose logs postgres | grep "database system is ready to accept connections"
+}
+
+function prismaIsReady() {
+    docker-compose logs prisma | grep "Server running on :"
 }
 
 function waitUntilServiceIsReady() {
@@ -29,3 +33,4 @@ function waitUntilServiceIsReady() {
 }
 
 waitUntilServiceIsReady dbIsReady "PostgreSQL"
+waitUntilServiceIsReady dbIsReady "Prisma"

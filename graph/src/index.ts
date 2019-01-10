@@ -52,9 +52,6 @@ function getUser(req: any, token: string): User {
             });
         });
 
-        /*return {
-            user
-        };*/
         return null;
     }
 }
@@ -63,7 +60,7 @@ const apolloServer = new ApolloServer({
     typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
     resolvers,
     context: ({ req }) => {
-        const token = req.headers.authorization;
+        const token = req.headers.authentication;
         return {
             prisma: prisma,
             user: getUser(req, token)

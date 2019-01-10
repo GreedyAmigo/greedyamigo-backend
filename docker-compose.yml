@@ -18,6 +18,7 @@ services:
     environment:
       PRISMA_CONFIG: |
         port: 4466
+        migrations: true
         databases:
           default:
             connector: postgres

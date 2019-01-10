@@ -1,15 +1,15 @@
 type AnonymousUser {
     id: ID! @unique
-    firstName: String
-    lastName: String
-    user: User!
+    firstName: String!
+    lastName: String!
+    user: User
 }
 
 type User {
     id: ID! @unique
-    firstName: String
-    lastName: String
-    email: String @unique
+    firstName: String!
+    lastName: String!
+    email: String! @unique
     things: [Thing!]
     moneyLendings: [MoneyLending!]
     thingLendings: [ThingLending!]
@@ -18,18 +18,18 @@ type User {
 type Thing {
     id: ID! @unique
     label: String! @unique
-    thingLendings: [ThingLending!]
 }
 
 type Reminder {
+    id: ID! @unique
     dateTime: DateTime
 }
 
 interface Lending {
     id: ID! @unique
-    dueDate: Date
+    dueDate: DateTime
     description: String!
-    cleared: Boolean! @defaultValue(value: false)
+    cleared: Boolean! @defaultValue(value: "false")
     emoji: String!
     reminder: [Reminder!]
 }

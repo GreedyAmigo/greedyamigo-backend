@@ -21,7 +21,6 @@ type User {
 type Thing {
     id: ID!
     label: String!
-    thingLendings: [ThingLending!]
 }
 
 type Reminder {
@@ -77,7 +76,7 @@ type Query {
 }
 
 type Mutation {
-    createUser(email: String!, firtName: String!, lastName: String!): User
+    createUser(email: String!, firstName: String!, lastName: String!): User
     createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser
     createMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending
     createThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending
