@@ -11,6 +11,7 @@ services:
 
   prisma:
     image: prismagraphql/prisma:1.24
+    container_name: prisma
     restart: always
     ports:
       - "4466:4466"
@@ -28,6 +29,7 @@ services:
 
   postgres:
     image: postgres:10.5
+    container_name: postgres
     restart: always
     ports:
       - "5432:5432"
