@@ -23,6 +23,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 const apolloServer = new ApolloServer({
     typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
     resolvers,
+    introspection: true,
     context: ({req}) => {
         return {
             req: req,
