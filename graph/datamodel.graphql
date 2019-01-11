@@ -32,6 +32,8 @@ interface Lending {
     description: String!
     cleared: Boolean! @defaultValue(value: "false")
     emoji: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
     reminder: [Reminder!]
 }
 

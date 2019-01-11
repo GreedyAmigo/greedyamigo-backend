@@ -39,6 +39,8 @@ interface Lending {
     cleared: Boolean!
     emoji: String!
     reminder: [Reminder!]
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type MoneyLending implements Lending {
