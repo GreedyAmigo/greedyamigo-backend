@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_1 = require("apollo-server");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const utils_1 = require("./utils");
 const resolvers = {
@@ -29,7 +29,7 @@ const resolvers = {
                 if (!user) {
                     throw new apollo_server_1.AuthenticationError('No user with that email!');
                 }
-                const valid = yield bcrypt.compare(args.password, user.password);
+                const valid = yield bcrypt.compareSync(args.password, user.password);
                 if (!valid) {
                     throw new apollo_server_1.AuthenticationError('Incorrect password!');
                 }
@@ -44,7 +44,7 @@ const resolvers = {
     Mutation: {
         signup(root, args, context) {
             return __awaiter(this, void 0, void 0, function* () {
-                const password = yield bcrypt.hash(args.password, 10);
+                const password = bcrypt.hashSync(args.password, 10);
                 const user = yield context.prisma.createUser(Object.assign({}, args, { password: password }));
                 const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1y' });
                 return {
