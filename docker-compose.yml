@@ -1,13 +1,16 @@
-version: '3'
+version: '3.5'
 services:
   graph:
     build: ./graph
     container_name: graph
+    command: ["./scripts/wait-for-it.sh", "prisma:4466", "--", "./scripts/bootstrap.sh"]
     ports:
       - "80:4000"
     depends_on:
       - prisma
     restart: always
+    networks:
+      - backend
     environment:
       NODE_ENV:
 
@@ -19,10 +22,11 @@ services:
       - "4466:4466"
     depends_on:
       - postgres
+    networks:
+      - backend
     environment:
       PRISMA_CONFIG: |
         port: 4466
-        migrations: true
         databases:
           default:
             connector: postgres
@@ -43,6 +47,11 @@ services:
       POSTGRES_PASSWORD: prisma
     volumes:
       - postgres:/var/lib/postgresql/data
+    networks:
+      - backend
 
 volumes:
   postgres:
+
+networks:
+  backend:
