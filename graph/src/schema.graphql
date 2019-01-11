@@ -1,6 +1,11 @@
 scalar Date
 scalar DateTime
 
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
 type AnonymousUser {
     id: ID!
     firstName: String
@@ -66,6 +71,8 @@ type Currency {
 }
 
 type Query {
+    me: User!
+    login(email: String!, password: String!): AuthPayload!
     anonymousUsersByUser(userId: ID!): [AnonymousUser!]!
     lendingsByUser(userId: ID!): [Lending!]!
     moneyLending(moneyLendingId: ID!): MoneyLending
@@ -76,9 +83,9 @@ type Query {
 }
 
 type Mutation {
-    createUser(email: String!, firstName: String!, lastName: String!): User
-    createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser
-    createMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending
-    createThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending
-    createThing(label: String!, userId: ID!): Thing
+    signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
+    createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser!
+    createMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
+    createThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
+    createThing(label: String!, userId: ID!): Thing!
 }

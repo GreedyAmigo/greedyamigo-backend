@@ -9,6 +9,7 @@ type User {
     id: ID! @unique
     firstName: String!
     lastName: String!
+    password: String!
     email: String! @unique
     things: [Thing!]
     moneyLendings: [MoneyLending!]
