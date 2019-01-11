@@ -52,7 +52,8 @@ type MoneyLending implements Lending {
     reminder: [Reminder!]
     amount: Int!
     currency: Currency!
-
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type ThingLending implements Lending {
@@ -63,6 +64,8 @@ type ThingLending implements Lending {
     emoji: String!
     reminder: [Reminder!]
     thing: Thing!
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type Currency {

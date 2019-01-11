@@ -40,7 +40,6 @@ interface Lending {
 type MoneyLending implements Lending {
     amount: Int!
     currency: Currency!
-
 }
 
 type ThingLending implements Lending {
