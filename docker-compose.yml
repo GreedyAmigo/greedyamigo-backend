@@ -5,6 +5,8 @@ services:
     container_name: graph
     ports:
       - "80:4000"
+    depends_on:
+      - prisma
     restart: always
     environment:
       NODE_ENV:
@@ -15,6 +17,8 @@ services:
     restart: always
     ports:
       - "4466:4466"
+    depends_on:
+      - postgres
     environment:
       PRISMA_CONFIG: |
         port: 4466
