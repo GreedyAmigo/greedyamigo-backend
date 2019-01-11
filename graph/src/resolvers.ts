@@ -1,5 +1,5 @@
 import {AuthenticationError} from "apollo-server";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import {getUserId} from "./utils";
 
@@ -19,7 +19,7 @@ const resolvers = {
                 throw new AuthenticationError('No user with that email!');
             }
 
-            const valid = await bcrypt.compare(args.password, user.password);
+            const valid = await bcrypt.compareSync(args.password, user.password);
             if (!valid) {
                 throw new AuthenticationError('Incorrect password!');
             }
@@ -34,7 +34,7 @@ const resolvers = {
     },
     Mutation: {
         async signup(root, args, context) {
-            const password = await bcrypt.hash(args.password, 10);
+            const password = bcrypt.hashSync(args.password, 10);
             const user = await context.prisma.createUser({...args, password: password});
             const token = jwt.sign({id: user.id, email: user.email}, process.env.JWT_SECRET, {expiresIn: '1y'});
 
