@@ -12,8 +12,10 @@ type User {
     password: String!
     email: String! @unique
     things: [Thing!]
-    moneyLendings: [MoneyLending!]
-    thingLendings: [ThingLending!]
+    moneyLendingsReceiver: [MoneyLending!] @relation(name: "MoneyLendingsReceiver")
+    thingLendingsReceiver: [ThingLending!] @relation(name: "ThingLendingsReceiver")
+    moneyLendingsDebtor: [MoneyLending!] @relation(name: "MoneyLendingsDebtor")
+    thingLendingsDebtor: [ThingLending!] @relation(name: "ThingLendingsDebtor")
 }
 
 type Thing {
@@ -31,7 +33,6 @@ interface Lending {
     dueDate: DateTime
     description: String!
     cleared: Boolean! @defaultValue(value: "false")
-    emoji: String!
     createdAt: DateTime!
     updatedAt: DateTime!
     reminder: [Reminder!]
@@ -44,6 +45,7 @@ type MoneyLending implements Lending {
 
 type ThingLending implements Lending {
     thing: Thing!
+    emoji: String!
 }
 
 type Currency {

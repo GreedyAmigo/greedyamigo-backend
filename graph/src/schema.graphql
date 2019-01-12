@@ -19,8 +19,10 @@ type User {
     lastName: String
     email: String
     things: [Thing!]
-    moneyLendings: [MoneyLending!]
-    thingLendings: [ThingLending!]
+    moneyLendingsReceiver: [MoneyLending!]
+    thingLendingsReceiver: [ThingLending!]
+    moneyLendingsDebtor: [MoneyLending!]
+    thingLendingsDebtor: [ThingLending!]
 }
 
 type Thing {
@@ -37,7 +39,6 @@ interface Lending {
     dueDate: Date
     description: String!
     cleared: Boolean!
-    emoji: String!
     reminder: [Reminder!]
     createdAt: DateTime!
     updatedAt: DateTime!
@@ -48,7 +49,6 @@ type MoneyLending implements Lending {
     dueDate: Date
     description: String!
     cleared: Boolean!
-    emoji: String!
     reminder: [Reminder!]
     amount: Int!
     currency: Currency!
@@ -78,19 +78,22 @@ type Currency {
 type Query {
     me: User!
     login(email: String!, password: String!): AuthPayload!
-    anonymousUsersByUser(userId: ID!): [AnonymousUser!]!
-    lendingsByUser(userId: ID!): [Lending!]!
+    anonymousUsers(userId: ID!): [AnonymousUser!]!
+    lendings(userId: ID!): [Lending!]!
     moneyLending(moneyLendingId: ID!): MoneyLending
     thingLending(thingLendingId: ID!): ThingLending
-    thingsByUser(userId: ID!): [Thing!]!
-    currenciesByAbbreviation(abbreviation: String!): Currency!
+    things(userId: ID!): [Thing!]!
+    currency(abbreviation: String!): Currency!
     currencies: [Currency!]!
 }
 
 type Mutation {
     signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
     createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser!
-    createMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
-    createThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
     createThing(label: String!, userId: ID!): Thing!
+    createReminder(dateTime: DateTime!, lendingId: ID!): Reminder!
+    createReceivingMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
+    createReceivingThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
+    createBorrowingMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
+    createBorrowingThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
 }
