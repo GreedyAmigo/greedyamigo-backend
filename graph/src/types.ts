@@ -1,14 +1,13 @@
-import {Prisma, User} from './generated/prisma-client';
-import * as express from "express";
+import { Prisma, User } from './generated/prisma-client';
+import * as express from 'express';
 
 interface Context {
-    prisma: Prisma;
-    req: express.Request;
+  prisma: Prisma;
+  req: express.Request;
 }
 
 interface AuthPayload {
-    token: string
+  token: string;
 }
 
-
-export {Context, AuthPayload};
+export { Context, AuthPayload };

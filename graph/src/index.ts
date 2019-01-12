@@ -1,17 +1,17 @@
-import {ApolloServer} from "apollo-server-express";
-import {importSchema} from "graphql-import";
-import * as express from "express";
-import * as http from "http";
-import * as dotenv from "dotenv";
-import * as path from "path";
-import * as favicon from "serve-favicon";
-import {resolvers} from "./resolvers";
-import {prisma} from "./generated/prisma-client";
+import { ApolloServer } from 'apollo-server-express';
+import { importSchema } from 'graphql-import';
+import * as express from 'express';
+import * as http from 'http';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+import * as favicon from 'serve-favicon';
+import { resolvers } from './resolvers';
+import { prisma } from './generated/prisma-client';
 
 dotenv.config();
 const configurations = {
-    production: {port: 80, hostname: 'graph.greedy-amigo.com'},
-    development: {port: 4000, hostname: 'localhost'}
+  production: { port: 80, hostname: 'graph.greedy-amigo.com' },
+  development: { port: 4000, hostname: 'localhost' },
 };
 
 const environment = process.env.NODE_ENV || 'production';
@@ -21,24 +21,24 @@ const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 const apolloServer = new ApolloServer({
-    typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
-    resolvers,
-    introspection: true,
-    context: ({req}) => {
-        return {
-            req: req,
-            prisma: prisma
-        };
-    }
+  resolvers,
+  typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
+  introspection: true,
+  context: ({ req }) => {
+    return {
+      req,
+      prisma,
+    };
+  },
 });
 
-apolloServer.applyMiddleware({app});
-let server = http.createServer(app);
+apolloServer.applyMiddleware({ app });
+const server = http.createServer(app);
 apolloServer.installSubscriptionHandlers(server);
 
-app.listen({port: 4000}, () =>
+app.listen({ port: 4000 }, () =>
     console.log(
         '🚀 Server ready at',
-        `http://${config.hostname}:${config.port}${apolloServer.graphqlPath}`
-    )
+        `http://${config.hostname}:${config.port}${apolloServer.graphqlPath}`,
+    ),
 );

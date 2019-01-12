@@ -1,0 +1,10 @@
+{
+  "extends": "tslint-config-airbnb",
+  "linterOptions": {
+    "exclude": [
+      "**/generated/tmp-resolvers/*.ts",
+      "**/generated/prisma-client/*.d.ts",
+      "**/generated/*.ts"
+    ]
+  }
+}
