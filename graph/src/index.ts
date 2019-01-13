@@ -5,7 +5,6 @@ import * as http from 'http';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 import * as favicon from 'serve-favicon';
-import { resolvers } from './resolvers';
 import { prisma } from './generated/prisma-client';
 import { Mutation } from './resolvers/Mutation';
 import { Query } from './resolvers/Query';
