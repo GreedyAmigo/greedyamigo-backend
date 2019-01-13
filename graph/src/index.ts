@@ -7,6 +7,13 @@ import * as path from 'path';
 import * as favicon from 'serve-favicon';
 import { resolvers } from './resolvers';
 import { prisma } from './generated/prisma-client';
+import { Mutation } from './resolvers/Mutation';
+import { Query } from './resolvers/Query';
+import { User } from './resolvers/User';
+import { Thing } from './resolvers/Thing';
+import { AnonymousUser } from './resolvers/AnonymousUser';
+import { ThingLending } from './resolvers/ThingLending';
+import { MoneyLending } from './resolvers/MoneyLending';
 
 dotenv.config();
 const configurations = {
@@ -19,6 +26,16 @@ const config = configurations[environment];
 
 const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+
+const resolvers = {
+  AnonymousUser,
+  MoneyLending,
+  Mutation,
+  Query,
+  Thing,
+  ThingLending,
+  User,
+};
 
 const apolloServer = new ApolloServer({
   resolvers,

@@ -2,50 +2,63 @@ type AnonymousUser {
     id: ID! @unique
     firstName: String!
     lastName: String!
-    user: User
+    user: User!
 }
 
 type User {
     id: ID! @unique
+    email: String! @unique
     firstName: String!
     lastName: String!
     password: String!
-    email: String! @unique
-    things: [Thing!]
-    moneyLendingsReceiver: [MoneyLending!] @relation(name: "MoneyLendingsReceiver")
-    thingLendingsReceiver: [ThingLending!] @relation(name: "ThingLendingsReceiver")
-    moneyLendingsDebtor: [MoneyLending!] @relation(name: "MoneyLendingsDebtor")
-    thingLendingsDebtor: [ThingLending!] @relation(name: "ThingLendingsDebtor")
+    things: [Thing!]!
+    anonymousUsers: [AnonymousUser!]!
+    moneyLendings: [MoneyLending!]!
+    thingLendings: [ThingLending!]!
 }
 
 type Thing {
     id: ID! @unique
     label: String! @unique
-}
-
-type Reminder {
-    id: ID! @unique
-    dateTime: DateTime
+    user: User!
 }
 
 interface Lending {
-    id: ID! @unique
     dueDate: DateTime
     description: String!
-    cleared: Boolean! @defaultValue(value: "false")
+    cleared: Boolean! @default(value: "false")
     createdAt: DateTime!
     updatedAt: DateTime!
-    reminder: [Reminder!]
 }
 
 type MoneyLending implements Lending {
+    id: ID! @unique
     amount: Int!
     currency: Currency!
+    owner: User!
+    participant :AnonymousUser!
+
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean! @default(value: "false")
+    isBorrowed: Boolean! @default(value: "true")
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type ThingLending implements Lending {
+    id: ID! @unique
     thing: Thing!
     emoji: String!
+    owner: User!
+    participant :AnonymousUser!
+
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean! @default(value: "false")
+    isBorrowed: Boolean! @default(value: "true")
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type Currency {

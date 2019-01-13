@@ -8,62 +8,64 @@ type AuthPayload {
 
 type AnonymousUser {
     id: ID!
-    firstName: String
-    lastName: String
+    firstName: String!
+    lastName: String!
     user: User!
 }
 
 type User {
     id: ID!
-    firstName: String
-    lastName: String
-    email: String
-    things: [Thing!]
-    moneyLendingsReceiver: [MoneyLending!]
-    thingLendingsReceiver: [ThingLending!]
-    moneyLendingsDebtor: [MoneyLending!]
-    thingLendingsDebtor: [ThingLending!]
+    firstName: String!
+    lastName: String!
+    email: String!
+    things: [Thing!]!
+    anonymousUsers: [AnonymousUser!]!
+    moneyLendings: [MoneyLending!]!
+    thingLendings: [ThingLending!]!
 }
 
 type Thing {
     id: ID!
     label: String!
-}
-
-type Reminder {
-    dateTime: DateTime
+    user: User!
 }
 
 interface Lending {
-    id: ID!
-    dueDate: Date
+    dueDate: DateTime
     description: String!
     cleared: Boolean!
-    reminder: [Reminder!]
     createdAt: DateTime!
     updatedAt: DateTime!
+    owner: User!
+    participant :AnonymousUser!
 }
 
 type MoneyLending implements Lending {
     id: ID!
-    dueDate: Date
-    description: String!
-    cleared: Boolean!
-    reminder: [Reminder!]
     amount: Int!
     currency: Currency!
+
+    owner: User!
+    participant :AnonymousUser!
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean!
+    isBorrowed: Boolean!
     createdAt: DateTime!
     updatedAt: DateTime!
 }
 
 type ThingLending implements Lending {
     id: ID!
-    dueDate: Date
+    thing: Thing!
+    emoji: String!
+
+    owner: User!
+    participant :AnonymousUser!
+    dueDate: DateTime
     description: String!
     cleared: Boolean!
-    emoji: String!
-    reminder: [Reminder!]
-    thing: Thing!
+    isBorrowed: Boolean!
     createdAt: DateTime!
     updatedAt: DateTime!
 }
@@ -78,22 +80,18 @@ type Currency {
 type Query {
     me: User!
     login(email: String!, password: String!): AuthPayload!
-    anonymousUsers(userId: ID!): [AnonymousUser!]!
-    lendings(userId: ID!): [Lending!]!
-    moneyLending(moneyLendingId: ID!): MoneyLending
-    thingLending(thingLendingId: ID!): ThingLending
-    things(userId: ID!): [Thing!]!
+    moneyLendings: [MoneyLending!]!
+    thingLendings: [ThingLending!]!
+    anonymousUsers: [AnonymousUser!]!
+    things: [Thing!]!
     currency(abbreviation: String!): Currency!
     currencies: [Currency!]!
 }
 
 type Mutation {
     signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
-    createAnonymousUser(firstName: String!, lastName: String!, userId: ID!): AnonymousUser!
-    createThing(label: String!, userId: ID!): Thing!
-    createReminder(dateTime: DateTime!, lendingId: ID!): Reminder!
-    createReceivingMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
-    createReceivingThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
-    createBorrowingMoneyLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, amount: Int!, currencyId: ID!, userId: ID!): MoneyLending!
-    createBorrowingThingLending(dueDate: Date, description: String!, cleared: Boolean, emoji: String, thingId: ID!, userId: ID!): ThingLending!
+    createAnonymousUser(firstName: String!, lastName: String!): AnonymousUser!
+    createThing(label: String!): Thing!
+    createMoneyLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Int!, currencyId: ID!): MoneyLending!
+    createThingLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
 }
