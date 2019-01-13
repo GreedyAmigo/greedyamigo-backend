@@ -11,8 +11,8 @@ export const Query: QueryResolvers.Type = {
     const userId = getUserId(ctx.req);
     return ctx.prisma.user({ id: userId });
   },
-  login: (parent, args, ctx) => {
-    const user = ctx.prisma.user({ email: args.email });
+  login: async (parent, args, ctx) => {
+    const user = await ctx.prisma.user({ email: args.email });
     if (!user) {
       throw new AuthenticationError('No user with that email!');
     }
