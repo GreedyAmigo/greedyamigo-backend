@@ -1,16 +1,39 @@
 version: '3.5'
 services:
+  router:
+    image: traefik
+    container_name: router
+    command: --api --docker
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      - "4466:4466"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /traefik.toml:/traefik.toml
+      - acme.json:/acme.json
+    networks:
+      - backend
+
   graph:
     build: ./graph
     container_name: graph
     command: ["./scripts/wait-for-it.sh", "prisma:4466", "--", "./scripts/bootstrap.sh"]
     ports:
-      - "80:4000"
+      - "4000:4000"
     depends_on:
       - prisma
     restart: always
     networks:
       - backend
+    labels:
+      - "traefik.docker.network=backend"
+      - "traefik.enable=true"
+      - "traefik.secured.frontend.rule=Host:graph.greedy-amigo.com/graphql"
+      - "traefik.secured.protocol=https"
+      - "traefik.secured.port=8000"
     environment:
       NODE_ENV:
 

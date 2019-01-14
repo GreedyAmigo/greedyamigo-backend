@@ -16,6 +16,6 @@ The Greedy Amigo backend.
 * [prisma](https://github.com/prisma/prisma)
 * [prisma-client-lib](https://github.com/prisma/prisma/tree/master/cli/packages/prisma-client-lib)
 * [serve-favicon](https://github.com/expressjs/serve-favicon)
-* [ts-node](hhttps://github.com/TypeStrong/ts-node)
+* [ts-node](https://github.com/TypeStrong/ts-node)
 * [typescript](https://github.com/Microsoft/TypeScript)
 
