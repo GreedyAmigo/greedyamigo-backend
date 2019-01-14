@@ -1,0 +1,97 @@
+scalar Date
+scalar DateTime
+
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
+type AnonymousUser {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    user: User!
+}
+
+type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    things: [Thing!]!
+    anonymousUsers: [AnonymousUser!]!
+    moneyLendings: [MoneyLending!]!
+    thingLendings: [ThingLending!]!
+}
+
+type Thing {
+    id: ID!
+    label: String!
+    user: User!
+}
+
+interface Lending {
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    owner: User!
+    participant :AnonymousUser!
+}
+
+type MoneyLending implements Lending {
+    id: ID!
+    amount: Int!
+    currency: Currency!
+
+    owner: User!
+    participant :AnonymousUser!
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean!
+    isBorrowed: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type ThingLending implements Lending {
+    id: ID!
+    thing: Thing!
+    emoji: String!
+
+    owner: User!
+    participant :AnonymousUser!
+    dueDate: DateTime
+    description: String!
+    cleared: Boolean!
+    isBorrowed: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Currency {
+    id: ID!
+    symbol: String!
+    Name: String!
+    Abbreviation: String!
+}
+
+type Query {
+    me: User!
+    login(email: String!, password: String!): AuthPayload!
+    moneyLendings: [MoneyLending!]!
+    thingLendings: [ThingLending!]!
+    anonymousUsers: [AnonymousUser!]!
+    things: [Thing!]!
+    currency(abbreviation: String!): Currency!
+    currencies: [Currency!]!
+}
+
+type Mutation {
+    signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
+    createAnonymousUser(firstName: String!, lastName: String!): AnonymousUser!
+    createThing(label: String!): Thing!
+    createMoneyLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Int!, currencyId: ID!): MoneyLending!
+    createThingLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
+}

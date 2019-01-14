@@ -1,11 +1,11 @@
-FROM node:10
+FROM node:11
 WORKDIR /usr/src/graph
 
 COPY package*.json ./
 RUN npm install
-
 COPY . .
 
-EXPOSE 4000
+RUN chmod +x ./scripts/wait-for-it.sh
+RUN chmod +x ./scripts/bootstrap.sh
 
-CMD [ "npm", "start" ]
+EXPOSE 4000
