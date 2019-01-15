@@ -11,12 +11,8 @@ services:
     restart: always
     networks:
       - backend
-    labels:
-      - "traefik.docker.network=backend"
-      - "traefik.enable=true"
-      - "traefik.secured.frontend.rule=Host:graph.greedy-amigo.com/graphql"
-      - "traefik.secured.protocol=https"
-      - "traefik.secured.port=4000"
+    volumes:
+      - /etc/letsencrypt/live/graph.greedy-amigo.com:/etc/letsencrypt/live/graph.greedy-amigo.com
     environment:
       NODE_ENV:
 
