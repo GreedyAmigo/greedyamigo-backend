@@ -3,7 +3,7 @@ services:
   router:
     image: traefik
     container_name: router
-    command: --api --docker --configFile=/traefik.toml
+    command: [--api, --docker, --configFile=/traefik.toml, 'touch acme.json && chmod 600 acme.json']
     restart: always
     ports:
       - "80:80"
