@@ -45,6 +45,7 @@ const apolloServer = new ApolloServer({
   resolvers,
   typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
   introspection: true,
+  tracing: true,
   context: ({ req }) => {
     return {
       req,
