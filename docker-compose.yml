@@ -1,21 +1,5 @@
 version: '3.5'
 services:
-  router:
-    image: traefik
-    container_name: router
-    command: [--api, --docker, --configFile=/traefik.toml, 'touch acme.json && chmod 600 acme.json']
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - $PWD/traefik.toml:/traefik.toml
-      - $PWD/acme.json:/acme.json
-    networks:
-      - backend
-
   graph:
     build: ./graph
     container_name: graph
