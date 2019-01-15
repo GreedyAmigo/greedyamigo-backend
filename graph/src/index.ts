@@ -58,8 +58,8 @@ if (config.ssl) {
   // are secured.
   server = https.createServer(
     {
-      key: fs.readFileSync('/etc/letsencrypt/live/graph.greedy-amigo.com/privkey.key'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/graph.greedy-amigo.com/cert.crt'),
+      key: fs.readFileSync('/etc/letsencrypt/live/graph.greedy-amigo.com/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/graph.greedy-amigo.com/cert.pem'),
     },
     app,
   );
@@ -71,6 +71,6 @@ apolloServer.installSubscriptionHandlers(server);
 app.listen({ port }, () =>
     console.log(
         '🚀 Server ready at',
-        `http${config.ssl ? 's' : ''}://${config.hostname}:${config.port}${apolloServer.graphqlPath}`,
+        `http${config.ssl ? 's' : ''}://${config.hostname}:${port}${apolloServer.graphqlPath}`,
     ),
 );
