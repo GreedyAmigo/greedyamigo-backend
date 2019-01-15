@@ -3,17 +3,16 @@ services:
   router:
     image: traefik
     container_name: router
-    command: --api --docker
+    command: --api --docker --configFile=/traefik.toml
     restart: always
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
-      - "4466:4466"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /traefik.toml:/traefik.toml
-      - acme.json:/acme.json
+      - $PWD/traefik.toml:/traefik.toml
+      - $PWD/acme.json:/acme.json
     networks:
       - backend
 
@@ -33,7 +32,7 @@ services:
       - "traefik.enable=true"
       - "traefik.secured.frontend.rule=Host:graph.greedy-amigo.com/graphql"
       - "traefik.secured.protocol=https"
-      - "traefik.secured.port=8000"
+      - "traefik.secured.port=4000"
     environment:
       NODE_ENV:
 

@@ -19,7 +19,7 @@ watch = true
 exposedByDefault = false
 
 [acme]
-email = "ammersimon@gmail.com@graph.greedy-amigo.com"
+email = "ammersimon@gmail.com"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
