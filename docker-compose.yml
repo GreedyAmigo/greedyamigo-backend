@@ -12,7 +12,7 @@ services:
     networks:
       - backend
     volumes:
-      - /etc/letsencrypt/live/graph.greedy-amigo.com:/etc/letsencrypt/live/graph.greedy-amigo.com
+      - /etc/letsencrypt/:/etc/letsencrypt/
     environment:
       NODE_ENV:
 
