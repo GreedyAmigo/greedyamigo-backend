@@ -15,6 +15,7 @@ import { Thing } from './resolvers/Thing';
 import { AnonymousUser } from './resolvers/AnonymousUser';
 import { ThingLending } from './resolvers/ThingLending';
 import { MoneyLending } from './resolvers/MoneyLending';
+import { Lending } from './resolvers/Lending';
 
 dotenv.config();
 const configurations = {
@@ -36,6 +37,7 @@ const resolvers = {
   Query,
   Thing,
   ThingLending,
+  Lending,
   User,
 };
 
