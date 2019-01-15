@@ -56,8 +56,6 @@ const apolloServer = new ApolloServer({
 apolloServer.applyMiddleware({ app });
 let server;
 if (config.ssl) {
-  // Assumes certificates are in .ssl folder from package root. Make sure the files
-  // are secured.
   server = https.createServer(
     {
       key: fs.readFileSync('/etc/letsencrypt/live/graph.greedy-amigo.com/privkey.pem'),
@@ -70,7 +68,7 @@ if (config.ssl) {
 }
 apolloServer.installSubscriptionHandlers(server);
 
-app.listen({ port }, () =>
+server.listen({ port }, () =>
     console.log(
         '🚀 Server ready at',
         `http${config.ssl ? 's' : ''}://${config.hostname}:${port}${apolloServer.graphqlPath}`,
