@@ -92,6 +92,6 @@ type Mutation {
     signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
     createAnonymousUser(firstName: String!, lastName: String!): AnonymousUser!
     createThing(label: String!): Thing!
-    createMoneyLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Int!, currencyId: ID!): MoneyLending!
+    createMoneyLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Float!, currencyId: ID!): MoneyLending!
     createThingLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
 }
