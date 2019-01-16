@@ -2,8 +2,8 @@ mutation{
     currency1: createCurrency(data:
     {
         symbol: "€"
-        Name: "Euro"
-        Abbreviation: "EUR"
+        name: "Euro"
+        abbreviation: "EUR"
     }){
         id
     }
@@ -11,8 +11,8 @@ mutation{
     currency2: createCurrency(data:
     {
         symbol: "$"
-        Name: "United States Dollar"
-        Abbreviation: "USD"
+        name: "United States Dollar"
+        abbreviation: "USD"
     }){
         id
     }
@@ -20,8 +20,8 @@ mutation{
     currency3: createCurrency(data:
     {
         symbol: "Fr"
-        Name: "Swiss Franc"
-        Abbreviation: "CHF"
+        name: "Swiss Franc"
+        abbreviation: "CHF"
     }){
         id
     }
@@ -29,8 +29,8 @@ mutation{
     currency4: createCurrency(data:
     {
         symbol: "£"
-        Name: "British Pounds"
-        Abbreviation: "GBP"
+        name: "British Pounds"
+        abbreviation: "GBP"
     }){
         id
     }
