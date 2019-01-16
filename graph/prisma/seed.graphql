@@ -43,17 +43,10 @@ mutation{
         password:"Password2018"
         things: {
             create: {
-                label: "Haube"
-            },
-            create: {
                 label: "Herr Der Ringe BlueRay"
             }
         }
         anonymousUsers: {
-            create: {
-                firstName: "Roman",
-                lastName: "Mählich"
-            },
             create: {
                 firstName: "Rainer",
                 lastName:"Pariasek"
