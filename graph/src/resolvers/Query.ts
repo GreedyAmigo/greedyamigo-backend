@@ -41,7 +41,7 @@ export const Query: QueryResolvers.Type = {
   },
   currency: (parent, args, ctx) => {
     getUserId(ctx.req);
-    return ctx.prisma.currency({ Abbreviation: args.abbreviation });
+    return ctx.prisma.currency({ abbreviation: args.abbreviation });
   },
   currencies: (parent, args, ctx) => {
     getUserId(ctx.req);
