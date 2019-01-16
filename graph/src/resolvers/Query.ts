@@ -23,7 +23,7 @@ export const Query: QueryResolvers.Type = {
     }
 
     const token = jwt.sign({ id: user.id, email: user.email },
-                           Buffer.from(process.env.JWT_SECRET).toString('base64'),
+                           process.env.JWT_SECRET,
                            { expiresIn: '1y' });
 
     return {
