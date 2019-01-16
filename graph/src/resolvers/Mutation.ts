@@ -1,22 +1,38 @@
 import { MutationResolvers } from '../generated/graphqlgen';
+import { UserInputError } from 'apollo-server-express';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
+import * as Validator from 'password-validator';
 import { getUserId } from '../utils';
 
 // tslint:disable-next-line:variable-name
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
   signup: async (parent, args, ctx) => {
-    const password = bcrypt.hashSync(args.password, 10);
-    const user = await ctx.prisma.createUser({ ...args, password });
-    const token = jwt.sign({ id: user.id, email: args.email },
-                           process.env.JWT_SECRET,
-                           { expiresIn: '1y' });
+    const schema = new Validator();
 
-    return {
-      token,
-      user,
-    };
+    schema
+      .is().min(6)
+      .is().max(255)
+      .has().digits()
+      .has().not().spaces()
+      .is().not().oneOf(['Passw0rd', 'Password123', 'password']);
+
+    if (schema.validate(args.password)) {
+      const password = bcrypt.hashSync(args.password, 10);
+      const user = await ctx.prisma.createUser({ ...args, password });
+      const token = jwt.sign({ id: user.id, email: args.email },
+                             process.env.JWT_SECRET,
+                             { expiresIn: '1y' });
+
+      return {
+        token,
+        user,
+      };
+    }
+
+    throw new UserInputError("Password doesn't match the requirements (Min: 6, Max: 255, 1 digit, no spaces");
+
   },
   createAnonymousUser: (parent, args, ctx) => {
     const email = getUserId(ctx.req);
