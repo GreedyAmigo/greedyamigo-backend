@@ -73,8 +73,8 @@ type ThingLending implements Lending {
 type Currency {
     id: ID!
     symbol: String!
-    Name: String!
-    Abbreviation: String!
+    name: String!
+    abbreviation: String!
 }
 
 type Query {
