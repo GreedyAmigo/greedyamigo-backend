@@ -42,7 +42,7 @@ interface Lending {
 
 type MoneyLending implements Lending {
     id: ID!
-    amount: Int!
+    amount: Float!
     currency: Currency!
 
     owner: User!

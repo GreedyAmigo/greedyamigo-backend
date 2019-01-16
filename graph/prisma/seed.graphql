@@ -59,10 +59,10 @@ mutation{
 
     user2: createUser(data:
     {
-        email:"cooldude21@mail.com",
+        email:"cooldude22@mail.com",
         firstName:"Rainer",
         lastName:"Pariasek",
-        password:"Password2018"
+        password:"Password2018",
         anonymousUsers: {
             create: {
                 firstName: "Roman",
