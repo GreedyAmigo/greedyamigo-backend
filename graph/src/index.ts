@@ -1,5 +1,4 @@
-import { ApolloServer } from 'apollo-server-express';
-import { importSchema } from 'graphql-import';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
 import * as express from 'express';
 import * as http from 'http';
 import * as dotenv from 'dotenv';
@@ -16,6 +15,9 @@ import { AnonymousUser } from './resolvers/AnonymousUser';
 import { ThingLending } from './resolvers/ThingLending';
 import { MoneyLending } from './resolvers/MoneyLending';
 import { Lending } from './resolvers/Lending';
+import { LengthDirective } from './directives/LengthDirective';
+import { importSchema } from 'graphql-import';
+import { mergeSchemas } from 'graphql-tools';
 
 dotenv.config();
 const configurations = {
@@ -41,9 +43,26 @@ const resolvers = {
   User,
 };
 
-const apolloServer = new ApolloServer({
+const mainSchema = makeExecutableSchema({
   resolvers,
   typeDefs: importSchema(path.join(__dirname, 'schema.graphql')),
+  schemaDirectives: {
+    length: LengthDirective,
+  },
+});
+
+const scalarsOnlySchema = makeExecutableSchema({
+  typeDefs: importSchema(path.join(__dirname, 'scalarSchema.graphql')),
+});
+
+const finalSchema = mergeSchemas({ schemas: [scalarsOnlySchema, mainSchema] });
+
+const apolloServer = new ApolloServer({
+  resolvers,
+  schema: finalSchema,
+  schemaDirectives: {
+    length: LengthDirective,
+  },
   introspection: true,
   tracing: true,
   context: ({ req }) => {
