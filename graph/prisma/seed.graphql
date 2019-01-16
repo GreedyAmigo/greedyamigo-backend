@@ -1,0 +1,83 @@
+mutation{
+    currency1: createCurrency(data:
+    {
+        symbol: "€"
+        Name: "Euro"
+        Abbreviation: "EUR"
+    }){
+        id
+    }
+
+    currency2: createCurrency(data:
+    {
+        symbol: "$"
+        Name: "United States Dollar"
+        Abbreviation: "USD"
+    }){
+        id
+    }
+
+    currency3: createCurrency(data:
+    {
+        symbol: "Fr"
+        Name: "Swiss Franc"
+        Abbreviation: "CHF"
+    }){
+        id
+    }
+
+    currency4: createCurrency(data:
+    {
+        symbol: "£"
+        Name: "British Pounds"
+        Abbreviation: "GBP"
+    }){
+        id
+    }
+
+    user1: createUser(data:
+    {
+        email:"cooldude21@mail.com",
+        firstName:"Herbert",
+        lastName:"Prohaska",
+        password:"Password2018"
+        things: {
+            create: {
+                label: "Haube"
+            },
+            create: {
+                label: "Herr Der Ringe BlueRay"
+            }
+        }
+        anonymousUsers: {
+            create: {
+                firstName: "Roman",
+                lastName: "Mählich"
+            },
+            create: {
+                firstName: "Rainer",
+                lastName:"Pariasek"
+            }
+        }
+    }
+    ){
+        id
+    }
+
+    user2: createUser(data:
+    {
+        email:"cooldude21@mail.com",
+        firstName:"Rainer",
+        lastName:"Pariasek",
+        password:"Password2018"
+        anonymousUsers: {
+            create: {
+                firstName: "Roman",
+                lastName: "Mählich"
+            }
+        }
+    }
+    ){
+        id
+    }
+}
