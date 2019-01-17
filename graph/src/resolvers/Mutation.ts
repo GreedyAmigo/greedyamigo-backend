@@ -273,7 +273,7 @@ export const Mutation: MutationResolvers.Type = {
       });
     }
 
-    throw new UserInputError(`Money lending with id ${args.moneyLending.id} does not exist or isn't connected to user!`);
+    throw new UserInputError(`Money lending with id ${args.id} does not exist or isn't connected to user!`);
   },
   updateThingLending: async (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
