@@ -41,38 +41,58 @@ export const Mutation: MutationResolvers.Type = {
   },
   createAnonymousUser: (parent, args, ctx) => {
     const email = getUserId(ctx.req);
-    return ctx.prisma.createAnonymousUser({ ...args, user: { connect: { id: email } } });
+    return ctx.prisma.createAnonymousUser(
+      {
+        ...args,
+        user:
+        {
+          connect:
+          {
+            id: email,
+          },
+        },
+      });
   },
+
   createThing: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
     return ctx.prisma.createThing({
       ...args,
-      user: { connect: { id: userId } },
+      user:
+      {
+        connect:
+        {
+          id: userId,
+        },
+      },
     });
   },
+
   createMoneyLending: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.createMoneyLending({
-      dueDate: args.dueDate,
-      amount: args.amount,
-      description: args.description,
-      isBorrowed: args.isBorrowed,
-      owner: { connect: { id: userId } },
-      participant: { connect: { id: args.participantId } },
-      currency: { connect: { id: args.currencyId } },
-    });
+    return ctx.prisma.createMoneyLending(
+      {
+        dueDate: args.dueDate,
+        amount: args.amount,
+        description: args.description,
+        isBorrowed: args.isBorrowed,
+        owner: { connect: { id: userId } },
+        participant: { connect: { id: args.participantId } },
+        currency: { connect: { id: args.currencyId } },
+      });
   },
   createThingLending: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.createThingLending({
-      dueDate: args.dueDate,
-      emoji: args.emoji,
-      description: args.description,
-      isBorrowed: args.isBorrowed,
-      owner: { connect: { id: userId } },
-      participant: { connect: { id: args.participantId } },
-      thing: { connect: { id: args.thingId } },
-    });
+    return ctx.prisma.createThingLending(
+      {
+        dueDate: args.dueDate,
+        emoji: args.emoji,
+        description: args.description,
+        isBorrowed: args.isBorrowed,
+        owner: { connect: { id: userId } },
+        participant: { connect: { id: args.participantId } },
+        thing: { connect: { id: args.thingId } },
+      });
   },
   deleteAnonymousUser: async (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
