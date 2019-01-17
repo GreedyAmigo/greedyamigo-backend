@@ -1,5 +1,5 @@
-scalar Date
 scalar DateTime
+directive @length(min: Int = 0, max: Int = 255) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
 
 type AuthPayload {
     token: String!
@@ -8,15 +8,15 @@ type AuthPayload {
 
 type AnonymousUser {
     id: ID!
-    firstName: String!
-    lastName: String!
+    firstName: String! @length(min: 2, max: 50)
+    lastName: String! @length(min: 2, max: 50)
     user: User!
 }
 
 type User {
     id: ID!
-    firstName: String!
-    lastName: String!
+    firstName: String! @length(min: 2, max: 50)
+    lastName: String! @length(min: 2, max: 50)
     email: String!
     things: [Thing!]!
     anonymousUsers: [AnonymousUser!]!
@@ -42,7 +42,7 @@ interface Lending {
 
 type MoneyLending implements Lending {
     id: ID!
-    amount: Int!
+    amount: Float!
     currency: Currency!
 
     owner: User!
@@ -73,8 +73,8 @@ type ThingLending implements Lending {
 type Currency {
     id: ID!
     symbol: String!
-    Name: String!
-    Abbreviation: String!
+    name: String!
+    abbreviation: String! @length(min: 3, max: 3)
 }
 
 type Query {
@@ -92,6 +92,13 @@ type Mutation {
     signup(email: String!, password: String!, firstName: String!, lastName: String!): AuthPayload!
     createAnonymousUser(firstName: String!, lastName: String!): AnonymousUser!
     createThing(label: String!): Thing!
-    createMoneyLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Int!, currencyId: ID!): MoneyLending!
-    createThingLending(dueDate: Date, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
+    createMoneyLending(dueDate: DateTime, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Float!, currencyId: ID!): MoneyLending!
+    createThingLending(dueDate: DateTime, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
+    deleteAnonymousUser(userId: ID!): AnonymousUser!
+    deleteThing(thingId: ID!): Thing!
+    deleteMoneyLending(moneyLendingId: ID!): MoneyLending!
+    deleteThingLending(thingLendingId: ID!): ThingLending!
+    updateThing(id: ID!, label: String!, userId: ID!): Thing!
+    updateMoneyLending(id: ID!, amount: Float!, currencyId: ID!, dueDate: DateTime!, description: String!, cleared: Boolean!, isBorrowed: Boolean!, participantId: ID!): MoneyLending!
+    updateThingLending(id: ID!, thingId: ID!, emoji: String!, dueDate: DateTime!, description: String!, cleared: Boolean!, isBorrowed: Boolean!, participantId: ID!): ThingLending!
 }

@@ -23,7 +23,7 @@ export const Query: QueryResolvers.Type = {
     }
 
     const token = jwt.sign({ id: user.id, email: user.email },
-                           Buffer.from(process.env.JWT_SECRET).toString('base64'),
+                           process.env.JWT_SECRET,
                            { expiresIn: '1y' });
 
     return {
@@ -33,15 +33,30 @@ export const Query: QueryResolvers.Type = {
   },
   anonymousUsers: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.anonymousUsers({ where: { user: { id: userId } } });
+    return ctx.prisma.anonymousUsers(
+      {
+        where:
+        {
+          user:
+          {
+            id: userId,
+          },
+        },
+      });
   },
   things: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.user({ id: userId }).things();
+    return ctx.prisma.user(
+      {
+        id: userId,
+      }).things();
   },
   currency: (parent, args, ctx) => {
     getUserId(ctx.req);
-    return ctx.prisma.currency({ Abbreviation: args.abbreviation });
+    return ctx.prisma.currency(
+      {
+        abbreviation: args.abbreviation,
+      });
   },
   currencies: (parent, args, ctx) => {
     getUserId(ctx.req);
@@ -49,10 +64,28 @@ export const Query: QueryResolvers.Type = {
   },
   moneyLendings: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.moneyLendings({ where: { owner: { id: userId } } });
+    return ctx.prisma.moneyLendings(
+      {
+        where:
+        {
+          owner:
+          {
+            id: userId,
+          },
+        },
+      });
   },
   thingLendings: (parent, args, ctx) => {
     const userId = getUserId(ctx.req);
-    return ctx.prisma.thingLendings({ where: { owner: { id: userId } } });
+    return ctx.prisma.thingLendings(
+      {
+        where:
+        {
+          owner:
+          {
+            id: userId,
+          },
+        },
+      });
   },
 };

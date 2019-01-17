@@ -33,7 +33,7 @@ interface Lending {
 
 type MoneyLending implements Lending {
     id: ID! @unique
-    amount: Int!
+    amount: Float!
     currency: Currency!
     owner: User!
     participant :AnonymousUser!
@@ -64,6 +64,6 @@ type ThingLending implements Lending {
 type Currency {
     id: ID! @unique
     symbol: String!
-    Name: String!
-    Abbreviation: String! @unique
+    name: String!
+    abbreviation: String! @unique
 }

@@ -1,6 +1,9 @@
 endpoint: http://prisma:4466
-datamodel: datamodel.graphql
+datamodel: prisma/datamodel.graphql
 
 generate:
   - generator: javascript-client
     output: ./src/generated/prisma-client
+
+seed:
+  import: prisma/seed.graphql

@@ -5,12 +5,14 @@ services:
     container_name: graph
     command: ["./scripts/wait-for-it.sh", "prisma:4466", "--", "./scripts/bootstrap.sh"]
     ports:
-      - "80:4000"
+      - "4000:4000"
     depends_on:
       - prisma
     restart: always
     networks:
       - backend
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
     environment:
       NODE_ENV:
 
