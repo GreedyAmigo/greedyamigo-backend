@@ -1,5 +1,5 @@
 ![](https://img.shields.io/github/license/GreedyAmigo/greedyamigo-backend.svg)
-[![](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/GreedyAmigo/greedyamigo-backend)
+[![](https://img.shields.io/github/release/GreedyAmigo/greedyamigo-backend.svg)](https://github.com/GreedyAmigo/greedyamigo-backend)
 
 # Greedy Amigo Backend
 ![](.github/peng_stack.png)
