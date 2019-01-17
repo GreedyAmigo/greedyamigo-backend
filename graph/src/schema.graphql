@@ -94,4 +94,11 @@ type Mutation {
     createThing(label: String!): Thing!
     createMoneyLending(dueDate: DateTime, description: String!, participantId: ID!, isBorrowed: Boolean, amount: Float!, currencyId: ID!): MoneyLending!
     createThingLending(dueDate: DateTime, description: String!, participantId: ID!, isBorrowed: Boolean, emoji: String, thingId: ID!): ThingLending!
+    deleteAnonymousUser(userId: ID!): AnonymousUser!
+    deleteThing(thingId: ID!): Thing!
+    deleteMoneyLending(moneyLendingId: ID!): MoneyLending!
+    deleteThingLending(thingLendingId: ID!): ThingLending!
+    updateThing(id: ID!, label: String!, userId: ID!): Thing!
+    updateMoneyLending(id: ID!, amount: Float!, currencyId: ID!, dueDate: DateTime!, description: String!, cleared: Boolean!, isBorrowed: Boolean!, participantId: ID!): MoneyLending!
+    updateThingLending(id: ID!, thingId: ID!, emoji: String!, dueDate: DateTime!, description: String!, cleared: Boolean!, isBorrowed: Boolean!, participantId: ID!): ThingLending!
 }
