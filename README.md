@@ -57,7 +57,7 @@ Run `npm install` in the graph folder and `docker-compose build` in the root dir
 * [typescript](https://github.com/Microsoft/TypeScript)
 
 ### Images
-* [Monkey Vector](www.freepik.com)
+* [Monkey Vector](https://www.freepik.com)
 * [Icons](https://www.flaticon.com/)
 
 ## 📖 Ressources
