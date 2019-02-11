@@ -32,6 +32,13 @@ Run `npm install` in the graph folder and `docker-compose build` in the root dir
 ![](.github/playground.png)
 
 
+### Showcase
+#### Dashboard
+![](.github/dashboard.png)
+
+#### Edit thing
+![](.github/edit_thing.png)
+
 ## 📝 Attributions
 ### Apollo & GraphQL
 * [apollo-server](https://github.com/apollographql/apollo-server)
